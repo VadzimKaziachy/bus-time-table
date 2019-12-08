@@ -15,12 +15,12 @@ class AppCore:
         self.window.title("Добро пожаловать в приложение PythonRu")
         self.window.geometry('400x250')
 
-        self.autobus_service = BusService()
+        self.bus_service = BusService()
 
         self.tab_control = ttk.Notebook(self.window)
 
-        self.edit_frame = EditFrame(master=self.tab_control, service=self.autobus_service)
-        self.upload_frame = UploadFrame(master=self.tab_control, service=self.autobus_service)
+        self.edit_frame = EditFrame(master=self.tab_control, service=self.bus_service)
+        self.upload_frame = UploadFrame(master=self.tab_control, service=self.bus_service)
 
         self.tab_control.add(self.upload_frame, text='Upload')
         self.tab_control.add(self.edit_frame, text='Edit')

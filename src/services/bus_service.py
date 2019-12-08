@@ -90,11 +90,18 @@ class BusService:
             filter(lambda bus: bus.starting_point == point or bus.final_point == point, self.repository.buses)
         )
 
-    def add_bus(self, bus: Bus) -> NoReturn:
+    def add_bus(self, starting_point: str, final_point: str, route_number: int, time: str) -> NoReturn:
         """
         Method is intended to add a bus to the repository.
         """
-        self.repository.buses.append(bus)
+        self.repository.buses.append(
+            Bus(
+                starting_point=starting_point,
+                final_point=final_point,
+                route_number=route_number,
+                time=time
+            )
+        )
 
 
 def enumerate_buses(buses: List[Bus], message: str) -> NoReturn:
@@ -111,10 +118,10 @@ def enumerate_buses(buses: List[Bus], message: str) -> NoReturn:
 def main() -> NoReturn:
     service = BusService()
 
-    service.add_bus(Bus(starting_point='point A', final_point='point B', route_number=1, time='15'))
-    service.add_bus(Bus(starting_point='point B', final_point='point C', route_number=2, time='16'))
-    service.add_bus(Bus(starting_point='point C', final_point='point D', route_number=3, time='17'))
-    service.add_bus(Bus(starting_point='point B', final_point='point F', route_number=4, time='18'))
+    service.add_bus(starting_point='point A', final_point='point B', route_number=1, time='15')
+    service.add_bus(starting_point='point B', final_point='point C', route_number=2, time='16')
+    service.add_bus(starting_point='point C', final_point='point D', route_number=3, time='17')
+    service.add_bus(starting_point='point B', final_point='point F', route_number=4, time='18')
 
     service.save_in_file()
 

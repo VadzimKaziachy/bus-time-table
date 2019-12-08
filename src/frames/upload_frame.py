@@ -40,5 +40,6 @@ class UploadFrame(ttk.Frame):
         is_save = self.service.save_path_for_file(path=path)
         if is_save:
             self.upload_title.configure(text='Data has been uploaded')
+            self.service.get_data()
         else:
             self.upload_title.configure(text='Something went wrong')
