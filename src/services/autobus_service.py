@@ -55,25 +55,26 @@ class AutobusService:
         """
         The method is needed to check if the file exists and whether it is supported.
         """
-        if os.path.isfile(path) and pathlib.Path(path).suffix == self.tsv_module.format_file:
-            return True
-        return False
+        return os.path.isfile(path) and pathlib.Path(path).suffix == self.tsv_module.format_file
 
-    def get_data(self) -> NoReturn:
+    def get_data(self) -> bool:
         """
         Receiving data from a file, moreover, a .tsv file corresponding to the module name.
         """
-        buses = self.tsv_module.read(path=self.path)
-        if self.is_correct_data(buses):
-            self.repository.buses = [
-                Autobus(
-                    time=bus.get('time'),
-                    final_point=bus.get('final_point'),
-                    route_number=bus.get('route_number'),
-                    starting_point=bus.get('starting_point')
-                )
-                for bus in buses
-            ]
+        if self._is_check_file(self.path):
+            buses = self.tsv_module.read(path=self.path)
+            if self.is_correct_data(buses):
+                self.repository.buses = [
+                    Autobus(
+                        time=bus.get('time'),
+                        final_point=bus.get('final_point'),
+                        route_number=bus.get('route_number'),
+                        starting_point=bus.get('starting_point')
+                    )
+                    for bus in buses
+                ]
+                return True
+        return False
 
     def sort_buses(self, reverse: bool) -> List[Autobus]:
         """
