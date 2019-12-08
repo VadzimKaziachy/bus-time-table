@@ -1,6 +1,6 @@
 from typing import List
 
-from models.autobus import Autobus
+from models.bus import Bus
 
 
 class AutobusRepository:
@@ -9,4 +9,4 @@ class AutobusRepository:
     """
 
     def __init__(self):
-        self.buses: List[Autobus] = list()
+        self.buses: List[Bus] = list()

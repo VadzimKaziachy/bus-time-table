@@ -4,8 +4,8 @@ import pathlib
 
 from typing import List, NoReturn, Dict
 
-from repositories.autobus_repository import AutobusRepository
-from src.models.autobus import Autobus
+from repositories.bus_repository import AutobusRepository
+from src.models.bus import Bus
 from src.modules.tsv_module import TsvModule
 from src.settings.base import BASE_DIR, DEFAULT_FILE_NAME
 from src.settings.logging import LOGGING
@@ -15,7 +15,7 @@ logging.config.dictConfig(LOGGING)
 logger = logging.getLogger('app')
 
 
-class AutobusService:
+class BusService:
 
     def __init__(self) -> NoReturn:
         self.path: str = BASE_DIR
@@ -65,7 +65,7 @@ class AutobusService:
             buses = self.tsv_module.read(path=self.path)
             if self.is_correct_data(buses):
                 self.repository.buses = [
-                    Autobus(
+                    Bus(
                         time=bus.get('time'),
                         final_point=bus.get('final_point'),
                         route_number=bus.get('route_number'),
@@ -76,13 +76,13 @@ class AutobusService:
                 return True
         return False
 
-    def sort_buses(self, reverse: bool) -> List[Autobus]:
+    def sort_buses(self, reverse: bool) -> List[Bus]:
         """
         The method is intended for sorting buses by bus number.
         """
         return sorted(self.repository.buses, key=lambda bus: bus.route_number, reverse=reverse)
 
-    def get_buses_by_point(self, point: str) -> List[Autobus]:
+    def get_buses_by_point(self, point: str) -> List[Bus]:
         """
         The method is required to search for buses at the start or end stop.
         """
@@ -90,14 +90,14 @@ class AutobusService:
             filter(lambda bus: bus.starting_point == point or bus.final_point == point, self.repository.buses)
         )
 
-    def add_bus(self, bus: Autobus) -> NoReturn:
+    def add_bus(self, bus: Bus) -> NoReturn:
         """
         Method is intended to add a bus to the repository.
         """
         self.repository.buses.append(bus)
 
 
-def enumerate_buses(buses: List[Autobus], message: str) -> NoReturn:
+def enumerate_buses(buses: List[Bus], message: str) -> NoReturn:
     """
     This function should not attract your attention, it is only needed for debugging the application.
     """
@@ -109,12 +109,12 @@ def enumerate_buses(buses: List[Autobus], message: str) -> NoReturn:
 
 
 def main() -> NoReturn:
-    service = AutobusService()
+    service = BusService()
 
-    service.add_bus(Autobus(starting_point='point A', final_point='point B', route_number=1, time='15'))
-    service.add_bus(Autobus(starting_point='point B', final_point='point C', route_number=2, time='16'))
-    service.add_bus(Autobus(starting_point='point C', final_point='point D', route_number=3, time='17'))
-    service.add_bus(Autobus(starting_point='point B', final_point='point F', route_number=4, time='18'))
+    service.add_bus(Bus(starting_point='point A', final_point='point B', route_number=1, time='15'))
+    service.add_bus(Bus(starting_point='point B', final_point='point C', route_number=2, time='16'))
+    service.add_bus(Bus(starting_point='point C', final_point='point D', route_number=3, time='17'))
+    service.add_bus(Bus(starting_point='point B', final_point='point F', route_number=4, time='18'))
 
     service.save_in_file()
 

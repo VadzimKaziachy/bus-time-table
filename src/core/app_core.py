@@ -5,7 +5,7 @@ from tkinter import ttk
 from frames.view_frame import ViewFrame
 from frames.edit_frame import EditFrame
 from frames.upload_frame import UploadFrame
-from services.autobus_service import AutobusService
+from services.bus_service import BusService
 
 
 class AppCore:
@@ -15,7 +15,7 @@ class AppCore:
         self.window.title("Добро пожаловать в приложение PythonRu")
         self.window.geometry('400x250')
 
-        self.autobus_service = AutobusService()
+        self.autobus_service = BusService()
 
         self.tab_control = ttk.Notebook(self.window)
 

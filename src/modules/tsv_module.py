@@ -2,7 +2,7 @@ import csv
 from typing import Dict, NoReturn, List
 
 from settings.base import DEFAULT_FILE_NAME
-from src.models.autobus import Autobus
+from src.models.bus import Bus
 from src.modules.base_module import BaseData
 
 
@@ -26,6 +26,6 @@ class TsvModule(BaseData):
         if all(isinstance(bus, dict) for bus in buses):
             path = self.get_file_path(path=path, file_name=self.default_file_name, format_file=self.format_file)
             with open(path, 'w', newline='') as tsv:
-                tsv_file = csv.DictWriter(tsv, delimiter=',', fieldnames=Autobus.get_fieldnames())
+                tsv_file = csv.DictWriter(tsv, delimiter=',', fieldnames=Bus.get_fieldnames())
                 tsv_file.writeheader()
                 tsv_file.writerows(buses)
