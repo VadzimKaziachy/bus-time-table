@@ -1,6 +1,6 @@
 ### BusStop
 
-**Русский** | [English](../../README.md)
+[Русский](docs/ru/README.md) | **English**
 
 This project was developed by [Python 3.7](https://www.ics.uci.edu/~pattis/common/handouts/pythoneclipsejava/python.html).
 
