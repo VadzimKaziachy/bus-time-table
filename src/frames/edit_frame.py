@@ -22,7 +22,7 @@ class EditFrame(ttk.Frame):
         self.list_box = tk.Listbox(master=self.list_box_frame, selectmode=EXTENDED)
         self.scroll = tk.Scrollbar(master=self.list_box_frame, command=self.list_box.yview)
 
-        self.update_button = tk.Button(master=self, text='Update', command=self.update_data, width=53)
+        self.update_button = tk.Button(master=self, text='Update', command=self.update_bus, width=52)
         self.save_button = tk.Button(master=self, text='Save', command=self.save_bus)
         self.edit_button = tk.Button(master=self, text='Edit', command=self.edit_bus)
         self.delete_button = tk.Button(master=self, text='Delete', command=self.delete_button)
@@ -32,10 +32,10 @@ class EditFrame(ttk.Frame):
         self.route_number_label = tk.Label(master=self, text='Route number')
         self.started_point_label = tk.Label(master=self, text='Started point')
 
-        self.time_entry = tk.Entry(master=self, width=21)
-        self.final_point_entry = tk.Entry(master=self, width=21)
-        self.route_number_entry = tk.Entry(master=self, width=21)
-        self.started_point_entry = tk.Entry(master=self, width=21)
+        self.time_entry = tk.Entry(master=self, width=20)
+        self.final_point_entry = tk.Entry(master=self, width=20)
+        self.route_number_entry = tk.Entry(master=self, width=20)
+        self.started_point_entry = tk.Entry(master=self, width=20)
 
     def _init_params_widget(self) -> NoReturn:
         """
@@ -62,7 +62,7 @@ class EditFrame(ttk.Frame):
 
         self.scroll.pack(side=LEFT, fill=Y)
 
-    def update_data(self):
+    def update_bus(self) -> NoReturn:
         """
         The method is necessary to get the path to the file and save it in the service.
         """
@@ -72,7 +72,7 @@ class EditFrame(ttk.Frame):
         for bus in buses:
             self.list_box.insert(END, bus.route_number)
 
-    def edit_bus(self):
+    def edit_bus(self) -> NoReturn:
         """
         In this method, data is added to the water fields.
         """
@@ -84,16 +84,16 @@ class EditFrame(ttk.Frame):
         self.started_point_entry.insert(index=0, string=bus.starting_point)
         self.route_number_entry.insert(index=0, string=bus.route_number)
 
-    def delete_button(self):
+    def delete_button(self) -> NoReturn:
         """
         The method is designed to deleted element.
         """
         index = self.list_box.curselection()
         if index:
             self.service.delete_bus(index=int(index[0]))
-        self.update_data()
+        self.update_bus()
 
-    def save_bus(self):
+    def save_bus(self) -> NoReturn:
         """
         The method is designed to save element or edit.
         """
@@ -114,9 +114,9 @@ class EditFrame(ttk.Frame):
                 time=self.time_entry.get()
             )
         self._clear_field()
-        self.update_data()
+        self.update_bus()
 
-    def _clear_field(self):
+    def _clear_field(self) -> NoReturn:
         """
         The method is designed to clear fields.
         """
