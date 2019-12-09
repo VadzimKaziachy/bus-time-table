@@ -8,9 +8,9 @@ logging.config.dictConfig(LOGGING)
 logger = logging.getLogger('app')
 
 
-class Bus:
+class Autobus:
 
-    def __init__(self, starting_point: str, final_point: str, route_number: int, time: str) -> NoReturn:
+    def __init__(self, starting_point: str, final_point: str, route_number: str, time: str) -> NoReturn:
         self.time = time
         self.final_point = final_point
         self.route_number = route_number
@@ -42,7 +42,7 @@ class Bus:
 
 
 if __name__ == '__main__':
-    buses = Bus(starting_point='point A', final_point='point B', route_number=1, time='15')
+    buses = Autobus(starting_point='point A', final_point='point B', route_number='1', time='15')
 
     logger.info(buses)
     logger.info(buses.route_number)

@@ -13,7 +13,7 @@ class AppCore:
     def __init__(self):
         self.window = tk.Tk()
         self.window.title("Добро пожаловать в приложение PythonRu")
-        self.window.geometry('400x250')
+        self.window.geometry('450x250')
 
         self.bus_service = BusService()
 
