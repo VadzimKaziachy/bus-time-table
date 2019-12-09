@@ -70,7 +70,7 @@ class EditFrame(ttk.Frame):
 
         buses = self.service.repository.buses
         for bus in buses:
-            self.list_box.insert(END, bus.route_number)
+            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
 
     def edit_bus(self) -> NoReturn:
         """

@@ -28,18 +28,18 @@ All application results are written both to the console and to the file **api.lo
 The application allows you to both add data and edit it, sort and search by stop.
 Also, when closing the application, the user will be given the opportunity to write file data.
 
-##### Upload
+#### Upload
 On this tab, the user can download the file he needs. After downloading, the data ends up in the repository.
 
 ![upload](docs/img/upload.png)
 
-##### Edit
+#### Edit
 On this tab, the user can change, add and delete data (in order to get data from the repository it is necessary.
 push button **update**)
 
 ![edit](docs/img/edit.png)
 
-##### View
+#### View
 On this tab, the user can search and sort data (in order to get data from the repository it is necessary.
 push button **update**).
 

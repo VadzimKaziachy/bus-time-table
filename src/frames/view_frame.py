@@ -55,7 +55,7 @@ class ViewFrame(tk.Frame):
 
         buses = self.service.get_buses_by_point(point=self.search_entry.get())
         for bus in buses:
-            self.list_box.insert(END, bus.route_number)
+            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
 
     def top_bus(self) -> NoReturn:
         """
@@ -65,7 +65,7 @@ class ViewFrame(tk.Frame):
 
         buses = self.service.sort_buses(reverse=True)
         for bus in buses:
-            self.list_box.insert(END, bus.route_number)
+            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
 
     def bottom_bus(self) -> NoReturn:
         """
@@ -75,7 +75,7 @@ class ViewFrame(tk.Frame):
 
         buses = self.service.sort_buses(reverse=False)
         for bus in buses:
-            self.list_box.insert(END, bus.route_number)
+            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
 
     def update_bus(self) -> NoReturn:
         """
@@ -85,4 +85,4 @@ class ViewFrame(tk.Frame):
 
         buses = self.service.repository.buses
         for bus in buses:
-            self.list_box.insert(END, bus.route_number)
+            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))

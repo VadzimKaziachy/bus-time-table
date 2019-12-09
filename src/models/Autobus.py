@@ -42,22 +42,24 @@ class Autobus:
 
 
 if __name__ == '__main__':
-    buses = Autobus(starting_point='point A', final_point='point B', route_number='1', time='15')
+    bus = Autobus(starting_point='point A', final_point='point B', route_number='1', time='15')
 
-    logger.info(buses)
-    logger.info(buses.route_number)
-    logger.info(buses.starting_point)
-    logger.info(buses.final_point)
-    logger.info(buses.time)
+    logger.info(bus)
+    logger.info(bus.route_number)
+    logger.info(bus.starting_point)
+    logger.info(bus.final_point)
+    logger.info(bus.time)
 
-    buses.route_number = 2
-    logger.info(buses.route_number)
+    bus.route_number = 2
+    logger.info(bus.route_number)
 
-    buses.starting_point = 'point C'
-    logger.info(buses.starting_point)
+    bus.starting_point = 'point C'
+    logger.info(bus.starting_point)
 
-    buses.final_point = 'point D'
-    logger.info(buses.final_point)
+    bus.final_point = 'point D'
+    logger.info(bus.final_point)
 
-    buses.time = '20'
-    logger.info(buses.time)
+    bus.time = '20'
+    logger.info(bus.time)
+
+    logger.info(bus)
