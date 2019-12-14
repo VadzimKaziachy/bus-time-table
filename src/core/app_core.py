@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+
 from typing import NoReturn
 
 from frames.view_frame import ViewFrame
@@ -34,6 +35,8 @@ class AppCore:
 
         self.window.protocol("WM_DELETE_WINDOW", self._ask_quit)
 
+        self._center_windows()
+
     def start_core(self) -> NoReturn:
         """
         The method is intended to launch the application.
@@ -48,3 +51,12 @@ class AppCore:
         if answer:
             self.bus_service.save_in_file()
         self.window.destroy()
+
+    def _center_windows(self):
+        """
+        The method is designed to center the window.
+        """
+        x = (self.window.winfo_screenwidth() - self.window.winfo_reqwidth()) / 2.5
+        y = (self.window.winfo_screenheight() - self.window.winfo_reqheight()) / 2.5
+        self.window.wm_geometry("+%d+%d" % (x, y))
+        self.window.mainloop()

@@ -8,7 +8,7 @@ logging.config.dictConfig(LOGGING)
 logger = logging.getLogger('app')
 
 
-class Autobus:
+class Bus:
 
     def __init__(self, starting_point: str, final_point: str, route_number: str, time: str) -> NoReturn:
         self.time = time
@@ -42,7 +42,7 @@ class Autobus:
 
 
 if __name__ == '__main__':
-    bus = Autobus(starting_point='point A', final_point='point B', route_number='1', time='15')
+    bus = Bus(starting_point='point A', final_point='point B', route_number='1', time='15')
 
     logger.info(bus)
     logger.info(bus.route_number)

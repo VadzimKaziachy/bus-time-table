@@ -1,7 +1,7 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import W
+from tkinter import ttk, W
 from tkinter import filedialog as fd
+
 from typing import NoReturn
 
 
@@ -36,8 +36,9 @@ class UploadFrame(ttk.Frame):
         """
         The method is necessary to get the path to the file and save it in the service.
         """
-        path = fd.askopenfilename()
+        path = fd.askopenfilename(filetypes=(("Tsv files", "*.tsv"),))
         is_save = self.service.save_path_for_file(path=path)
+
         if is_save:
             self.upload_title.configure(text='Data has been uploaded')
             self.service.get_data()

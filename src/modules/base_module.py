@@ -18,7 +18,8 @@ class BaseData(ABC):
     def write(self, path: str, value) -> NoReturn:
         ...
 
-    def get_file_path(self, path: str, file_name: str, format_file: str) -> str:
+    @staticmethod
+    def get_file_path(path: str, file_name: str, format_file: str) -> str:
         """
         If there is a file in the path, then the path is returned, otherwise, the path from the parameters is collected.
         """

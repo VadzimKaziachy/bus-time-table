@@ -1,14 +1,15 @@
 import os
-import logging.config
 import pathlib
+import logging.config
 
 from typing import List, NoReturn, Dict
 
-from repositories.bus_repository import AutobusRepository
-from src.models.Autobus import Autobus
+from repositories.bus_repository import BusRepository
+
+from src.models.Bus import Bus
+from src.settings.logging import LOGGING
 from src.modules.tsv_module import TsvModule
 from src.settings.base import BASE_DIR, DEFAULT_FILE_NAME
-from src.settings.logging import LOGGING
 
 logging.config.dictConfig(LOGGING)
 
@@ -20,7 +21,7 @@ class BusService:
     def __init__(self) -> NoReturn:
         self.path: str = BASE_DIR
         self.tsv_module = TsvModule()
-        self.repository = AutobusRepository()
+        self.repository = BusRepository()
 
     def save_in_file(self) -> NoReturn:
         """
@@ -33,10 +34,10 @@ class BusService:
         """
         If the file was not found then `False` otherwise the path to the file will be saved.
         """
-        if self._is_check_file(path):
+        is_check_file = self._is_check_file(path)
+        if is_check_file:
             self.path = path
-            return True
-        return False
+        return is_check_file
 
     @staticmethod
     def is_correct_data(buses: List[Dict[str, str]]) -> bool:
@@ -61,11 +62,12 @@ class BusService:
         """
         Receiving data from a file, moreover, a .tsv file corresponding to the module name.
         """
-        if self._is_check_file(self.path):
+        is_check_file = self._is_check_file(self.path)
+        if is_check_file:
             buses = self.tsv_module.read(path=self.path)
             if self.is_correct_data(buses):
                 self.repository.buses = [
-                    Autobus(
+                    Bus(
                         time=bus.get('time'),
                         final_point=bus.get('final_point'),
                         route_number=bus.get('route_number'),
@@ -73,16 +75,15 @@ class BusService:
                     )
                     for bus in buses
                 ]
-                return True
-        return False
+        return is_check_file
 
-    def sort_buses(self, reverse: bool) -> List[Autobus]:
+    def sort_buses(self, reverse: bool) -> List[Bus]:
         """
         The method is intended for sorting buses by bus number.
         """
         return sorted(self.repository.buses, key=lambda bus: bus.route_number, reverse=reverse)
 
-    def get_buses_by_point(self, point: str) -> List[Autobus]:
+    def get_buses_by_point(self, point: str) -> List[Bus]:
         """
         The method is required to search for buses at the start or end stop.
         """
@@ -90,7 +91,7 @@ class BusService:
             filter(lambda bus: bus.starting_point == point or bus.final_point == point, self.repository.buses)
         )
 
-    def get_bus_by_number(self, index: int) -> Autobus:
+    def get_bus_by_number(self, index: int) -> Bus:
         """
         This method searches for a Autobus by route number and returns a Autobus.
         """
@@ -102,10 +103,10 @@ class BusService:
         """
         bus = self.repository.buses[index]
 
-        bus.starting_point = starting_point
+        bus.time = time
         bus.final_point = final_point
         bus.route_number = route_number
-        bus.time = time
+        bus.starting_point = starting_point
 
     def delete_bus(self, index: int) -> NoReturn:
         """
@@ -118,7 +119,7 @@ class BusService:
         Method is intended to add a bus to the repository.
         """
         self.repository.buses.append(
-            Autobus(
+            Bus(
                 starting_point=starting_point,
                 final_point=final_point,
                 route_number=route_number,
@@ -127,7 +128,7 @@ class BusService:
         )
 
 
-def enumerate_buses(buses: List[Autobus], message: str) -> NoReturn:
+def enumerate_buses(buses: List[Bus], message: str) -> NoReturn:
     """
     This function should not attract your attention, it is only needed for debugging the application.
     """

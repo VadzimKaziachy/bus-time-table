@@ -4,7 +4,7 @@
 
 This project was developed by [Python 3.7](https://www.ics.uci.edu/~pattis/common/handouts/pythoneclipsejava/python.html).
 
-**Содержание**
+**Content**
 
 - [About app](#about-app)
 - [Application launch](#application-launch)

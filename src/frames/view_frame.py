@@ -1,7 +1,9 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import W, EXTENDED, LEFT, Y, E, END
-from typing import NoReturn
+from tkinter import ttk, Y, E, END, EXTENDED, LEFT
+
+from typing import NoReturn, List
+
+from models.Bus import Bus
 
 
 class ViewFrame(tk.Frame):
@@ -22,10 +24,10 @@ class ViewFrame(tk.Frame):
         self.list_box = tk.Listbox(master=self.list_box_frame, selectmode=EXTENDED)
         self.scroll = tk.Scrollbar(master=self.list_box_frame, command=self.list_box.yview)
 
-        self.update_button = tk.Button(master=self, text='Update', command=self.update_bus, width=52)
-        self.search_button = tk.Button(master=self, text='Search', command=self.search_bus)
         self.top_button = tk.Button(master=self, text='Top', command=self.top_bus)
+        self.search_button = tk.Button(master=self, text='Search', command=self.search_bus)
         self.bottom_button = tk.Button(master=self, text='Bottom', command=self.bottom_bus)
+        self.update_button = tk.Button(master=self, text='Update', command=self.update_bus, width=52)
 
         self.search_entry = tk.Entry(master=self, width=32)
 
@@ -54,8 +56,7 @@ class ViewFrame(tk.Frame):
         self.list_box.delete(first=0, last=END)
 
         buses = self.service.get_buses_by_point(point=self.search_entry.get())
-        for bus in buses:
-            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
+        self._set_list_box(buses)
 
     def top_bus(self) -> NoReturn:
         """
@@ -64,8 +65,7 @@ class ViewFrame(tk.Frame):
         self.list_box.delete(first=0, last=END)
 
         buses = self.service.sort_buses(reverse=True)
-        for bus in buses:
-            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
+        self._set_list_box(buses)
 
     def bottom_bus(self) -> NoReturn:
         """
@@ -74,8 +74,7 @@ class ViewFrame(tk.Frame):
         self.list_box.delete(first=0, last=END)
 
         buses = self.service.sort_buses(reverse=False)
-        for bus in buses:
-            self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
+        self._set_list_box(buses)
 
     def update_bus(self) -> NoReturn:
         """
@@ -84,5 +83,11 @@ class ViewFrame(tk.Frame):
         self.list_box.delete(first=0, last=END)
 
         buses = self.service.repository.buses
+        self._set_list_box(buses)
+
+    def _set_list_box(self, buses: List[Bus]) -> NoReturn:
+        """
+        The method is needed to populate the `list_box` data.
+        """
         for bus in buses:
             self.list_box.insert(END, 'Route Number - {}'.format(bus.route_number))
