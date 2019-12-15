@@ -39,27 +39,3 @@ class Bus:
     @staticmethod
     def get_fieldnames() -> List[str]:
         return ['route_number', 'starting_point', 'final_point', 'time']
-
-
-if __name__ == '__main__':
-    bus = Bus(starting_point='point A', final_point='point B', route_number='1', time='15')
-
-    logger.info(bus)
-    logger.info(bus.route_number)
-    logger.info(bus.starting_point)
-    logger.info(bus.final_point)
-    logger.info(bus.time)
-
-    bus.route_number = 2
-    logger.info(bus.route_number)
-
-    bus.starting_point = 'point C'
-    logger.info(bus.starting_point)
-
-    bus.final_point = 'point D'
-    logger.info(bus.final_point)
-
-    bus.time = '20'
-    logger.info(bus.time)
-
-    logger.info(bus)

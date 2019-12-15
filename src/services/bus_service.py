@@ -6,7 +6,7 @@ from typing import List, NoReturn, Dict
 
 from repositories.bus_repository import BusRepository
 
-from src.models.Bus import Bus
+from src.models.bus import Bus
 from src.settings.logging import LOGGING
 from src.modules.tsv_module import TsvModule
 from src.settings.base import BASE_DIR, DEFAULT_FILE_NAME

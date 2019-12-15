@@ -1,6 +1,6 @@
 from typing import List
 
-from models.Bus import Bus
+from models.bus import Bus
 
 
 class BusRepository:

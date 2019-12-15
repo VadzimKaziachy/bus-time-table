@@ -3,7 +3,7 @@ from tkinter import ttk, Y, E, END, EXTENDED, LEFT
 
 from typing import NoReturn, List
 
-from models.Bus import Bus
+from models.bus import Bus
 
 
 class ViewFrame(tk.Frame):

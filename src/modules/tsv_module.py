@@ -1,7 +1,7 @@
 import csv
 from typing import Dict, NoReturn, List
 
-from src.models.Bus import Bus
+from src.models.bus import Bus
 from src.modules.base_module import BaseData
 from settings.base import DEFAULT_FILE_NAME
 
