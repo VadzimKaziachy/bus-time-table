@@ -1,4 +1,4 @@
-### BusStop
+### Bus-time-table
 
 [Русский](docs/ru/README.md) | **English**
 
