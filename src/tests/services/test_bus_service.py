@@ -74,7 +74,7 @@ class TestBusService(unittest.TestCase):
 
         self.assertListEqual(self.service.repository.buses, [])
 
-    def test_edit_bus(self):
+    def test_edit_bus(self) -> NoReturn:
         time: str = '16'
         route_number: str = '2'
         final_point: str = 'point A'
