@@ -1,7 +1,7 @@
 import logging.config
 from typing import Dict, NoReturn, List
 
-from src.settings.logging import LOGGING
+from settings.logging import LOGGING
 
 logging.config.dictConfig(LOGGING)
 

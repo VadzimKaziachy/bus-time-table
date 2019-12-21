@@ -6,10 +6,10 @@ from typing import List, NoReturn, Dict
 
 from repositories.bus_repository import BusRepository
 
-from src.models.bus import Bus
-from src.settings.logging import LOGGING
-from src.modules.tsv_module import TsvModule
-from src.settings.base import BASE_DIR, DEFAULT_FILE_NAME
+from models.bus import Bus
+from settings.logging import LOGGING
+from modules.tsv_module import TsvModule
+from settings.base import BASE_DIR, DEFAULT_FILE_NAME
 
 logging.config.dictConfig(LOGGING)
 

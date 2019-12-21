@@ -1,7 +1,7 @@
 import unittest
 from typing import NoReturn
 
-from models.bus import Bus
+from src.models.bus import Bus
 
 
 class TestBus(unittest.TestCase):
